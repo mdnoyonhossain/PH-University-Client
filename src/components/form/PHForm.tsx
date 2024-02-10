@@ -1,18 +1,29 @@
-import { Form } from "antd";
-import { ReactNode } from "react";
-import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Form } from 'antd';
+import { ReactNode } from 'react';
+import {
+    FieldValues,
+    FormProvider,
+    SubmitHandler,
+    useForm,
+} from 'react-hook-form';
+
+type TFormConfig = {
+    defaultValues?: Record<string, any>;
+    resolver?: any;
+};
 
 type TFormProps = {
     onSubmit: SubmitHandler<FieldValues>;
     children: ReactNode;
 } & TFormConfig;
 
-type TFormConfig = {
-    defaultValues?: Record<string, any>;
-    resolver?: any;
-}
-
-const PHForm = ({ children, onSubmit, defaultValues, resolver }: TFormProps) => {
+const PHForm = ({
+    onSubmit,
+    children,
+    defaultValues,
+    resolver,
+}: TFormProps) => {
     const formConfig: TFormConfig = {};
 
     if (defaultValues) {
@@ -28,7 +39,7 @@ const PHForm = ({ children, onSubmit, defaultValues, resolver }: TFormProps) => 
     const submit: SubmitHandler<FieldValues> = (data) => {
         onSubmit(data);
         methods.reset();
-    }
+    };
 
     return (
         <FormProvider {...methods}>
